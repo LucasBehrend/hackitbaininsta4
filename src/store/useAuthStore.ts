@@ -7,6 +7,7 @@ export interface UserProfile {
   name: string;
   email: string;
   neighborhood?: string;
+  lote?: string;
   photoURL?: string;
 }
 

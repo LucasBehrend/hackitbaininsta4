@@ -11,9 +11,10 @@ import Auth from './pages/Auth';
 import Cart from './pages/Cart';
 import CheckoutResult from './pages/CheckoutResult';
 import Orders from './pages/Orders';
-//
+import { Loader2 } from 'lucide-react';
+
 function App() {
-  const { setUser, setLoading } = useAuthStore();
+  const { setUser, setLoading, loading } = useAuthStore();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -23,8 +24,10 @@ function App() {
         const userDoc = await getDoc(userDocRef);
 
         let neighborhood = '';
+        let lote = '';
         if (userDoc.exists()) {
           neighborhood = userDoc.data().neighborhood || '';
+          lote = userDoc.data().lote || '';
         }
 
         const userProfile: UserProfile = {
@@ -33,6 +36,7 @@ function App() {
           email: firebaseUser.email || '',
           photoURL: firebaseUser.photoURL || undefined,
           neighborhood,
+          lote,
         };
         setUser(userProfile);
 
@@ -48,6 +52,14 @@ function App() {
 
     return () => unsubscribe();
   }, [setUser, setLoading]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <Loader2 className="h-8 w-8 text-blue-900 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
