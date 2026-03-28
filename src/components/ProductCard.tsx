@@ -11,7 +11,7 @@ export interface Product {
   category: string;
   price: number;
   image: string;
-  demand?: number; // mock for now
+  demand?: number;
 }
 
 interface ProductCardProps {
@@ -50,8 +50,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-200 flex flex-col group">
-      <div className="relative h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
+    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-blue-100 transition-all duration-200 flex flex-col group">
+      <div className="relative h-52 bg-blue-50 flex items-center justify-center overflow-hidden">
         {product.image ? (
           <img
             src={product.image}
@@ -59,65 +59,62 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="object-cover h-full w-full group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
-          <div className="text-gray-400">Sin imagen</div>
+          <div className="text-gray-400 text-sm">Sin imagen</div>
         )}
-
-        {/* Overlay gradient for better badge readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
       </div>
 
       <div className="p-5 flex flex-col flex-grow">
-        <h3 className="text-lg font-bold text-gray-900 mb-1.5 line-clamp-2 leading-tight min-h-[3rem]">{product.name}</h3>
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2 flex-grow">{product.description}</p>
+        <h3 className="text-base font-bold text-gray-900 mb-1 line-clamp-2 leading-snug min-h-[2.8rem]">{product.name}</h3>
+        <p className="text-xs text-gray-400 mb-4 line-clamp-2 flex-grow">{product.description}</p>
 
-        <div className="flex items-end justify-between mb-5 mt-auto">
+        <div className="flex items-end justify-between mb-4 mt-auto">
           <div>
-            <span className="text-2xl font-black text-gray-900">${product.price.toFixed(2)}</span>
-            <span className="text-sm text-gray-500 ml-1">/ un</span>
+            <span className="text-2xl font-black text-blue-900">${product.price.toFixed(2)}</span>
+            <span className="text-xs text-gray-400 ml-1">/ un</span>
           </div>
         </div>
 
         <div className="flex items-center space-x-3">
-          <div className="flex items-center bg-gray-100 rounded-lg p-1">
+          <div className="flex items-center bg-blue-50 rounded-lg p-1 border border-blue-100">
             <button
               onClick={handleDecrement}
-              className="p-1.5 rounded-md text-gray-600 hover:bg-white hover:shadow-sm hover:text-gray-900 transition-all focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="p-1.5 rounded-md text-blue-700 hover:bg-white hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-400"
               disabled={isAdded}
               aria-label="Decrease quantity"
             >
-              <Minus className="h-4 w-4" />
+              <Minus className="h-3.5 w-3.5" />
             </button>
-            <span className="font-bold w-8 text-center text-gray-900">{quantity}</span>
+            <span className="font-bold w-7 text-center text-blue-900 text-sm">{quantity}</span>
             <button
               onClick={handleIncrement}
-              className="p-1.5 rounded-md text-gray-600 hover:bg-white hover:shadow-sm hover:text-gray-900 transition-all focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="p-1.5 rounded-md text-blue-700 hover:bg-white hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-400"
               disabled={isAdded}
               aria-label="Increase quantity"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-3.5 w-3.5" />
             </button>
           </div>
 
           <button
             onClick={handleAddToCart}
             disabled={isAdded}
-            className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center font-bold transition-all ${
+            className={`flex-1 py-2.5 px-4 rounded-xl flex items-center justify-center font-bold text-sm transition-all ${
               isAdded
-                ? 'bg-green-100 text-green-700 ring-2 ring-green-500 ring-offset-2'
+                ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-400 ring-offset-1'
                 : user
-                ? 'bg-green-600 text-white hover:bg-green-700 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-300'
+                ? 'bg-blue-900 text-white hover:bg-blue-800 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0'
+                : 'bg-gray-100 text-gray-500 hover:bg-gray-200 border border-gray-200'
             }`}
           >
             {isAdded ? (
               <>
-                <Check className="h-5 w-5 mr-1.5" />
+                <Check className="h-4 w-4 mr-1.5" />
                 ¡Listo!
               </>
             ) : (
               <>
-                <ShoppingCart className="h-5 w-5 mr-1.5" />
+                <ShoppingCart className="h-4 w-4 mr-1.5" />
                 Agregar
               </>
             )}

@@ -21,7 +21,6 @@ export default function Auth() {
       try {
         const querySnapshot = await getDocs(collection(db, 'neighborhoods'));
         const fetchedNeighborhoods = querySnapshot.docs.map(doc => doc.data().name as string);
-
         setAvailableNeighborhoods((prev) => {
           const allNeighborhoods = Array.from(new Set([...prev, ...fetchedNeighborhoods]));
           return allNeighborhoods.sort();
@@ -30,7 +29,6 @@ export default function Auth() {
         console.error('Error fetching neighborhoods:', err);
       }
     };
-
     fetchNeighborhoods();
   }, []);
 
@@ -40,15 +38,12 @@ export default function Auth() {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      // Check if user has a neighborhood set in Firestore
       const userDocRef = doc(db, 'users', user.uid);
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists() && userDoc.data().neighborhood) {
-        // User is fully registered
         navigate('/productos');
       } else {
-        // Need to ask for neighborhood
         setPendingUser(user);
         setNeedsNeighborhood(true);
       }
@@ -71,7 +66,6 @@ export default function Auth() {
 
     try {
       setError(null);
-      // Save user profile with neighborhood to Firestore
       const userDocRef = doc(db, 'users', pendingUser.uid);
       await setDoc(userDocRef, {
         name: pendingUser.displayName,
@@ -81,7 +75,6 @@ export default function Auth() {
         createdAt: new Date(),
       });
 
-      // If it's a new custom neighborhood, add it to the neighborhoods collection
       if (neighborhood === 'Otro') {
         const neighborhoodRef = doc(collection(db, 'neighborhoods'));
         await setDoc(neighborhoodRef, { name: customNeighborhood });
@@ -96,68 +89,68 @@ export default function Auth() {
 
   if (needsNeighborhood) {
     return (
-      <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-          <div className="text-center">
-            <Package className="mx-auto h-12 w-12 text-green-600" />
-            <h2 className="mt-6 text-2xl font-extrabold text-gray-900">
+      <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] py-12 px-4 bg-gradient-to-b from-blue-50 to-white">
+        <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-sm border border-blue-100">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-900 text-white rounded-2xl mb-4 shadow-sm">
+              <Package className="h-7 w-7" />
+            </div>
+            <h2 className="text-2xl font-extrabold text-gray-900">
               ¡Casi listo, {pendingUser?.displayName?.split(' ')[0]}!
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-gray-500">
               Para unirte a las compras comunales, necesitamos saber de qué barrio sos.
             </p>
           </div>
 
-          <form className="mt-8 space-y-6" onSubmit={handleCompleteRegistration}>
+          <form className="space-y-5" onSubmit={handleCompleteRegistration}>
             {error && (
-              <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm flex items-center">
-                <AlertCircle className="h-4 w-4 mr-2" />
+              <div className="bg-red-50 text-red-600 p-3 rounded-xl text-sm flex items-center gap-2 border border-red-100">
+                <AlertCircle className="h-4 w-4 flex-shrink-0" />
                 {error}
               </div>
             )}
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="neighborhood" className="block text-sm font-medium text-gray-700 mb-2">
-                  Seleccioná tu Barrio Privado
-                </label>
-                <select
-                  id="neighborhood"
-                  name="neighborhood"
-                  required
-                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                  value={neighborhood}
-                  onChange={(e) => setNeighborhood(e.target.value)}
-                >
-                  <option value="">Selecciona tu barrio...</option>
-                  {availableNeighborhoods.map((n) => (
-                    <option key={n} value={n}>{n}</option>
-                  ))}
-                  <option value="Otro">Otro (crear nuevo)</option>
-                </select>
-              </div>
-
-              {neighborhood === 'Otro' && (
-                <div>
-                  <label htmlFor="customNeighborhood" className="block text-sm font-medium text-gray-700 mb-2">
-                    Ingresá el nombre de tu barrio
-                  </label>
-                  <input
-                    id="customNeighborhood"
-                    name="customNeighborhood"
-                    type="text"
-                    required
-                    placeholder="Nombre del barrio"
-                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                    value={customNeighborhood}
-                    onChange={(e) => setCustomNeighborhood(e.target.value)}
-                  />
-                </div>
-              )}
+            <div>
+              <label htmlFor="neighborhood" className="block text-sm font-semibold text-gray-700 mb-2">
+                Seleccioná tu Barrio Privado
+              </label>
+              <select
+                id="neighborhood"
+                name="neighborhood"
+                required
+                className="w-full px-3 py-2.5 border border-gray-200 text-gray-900 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-colors bg-white"
+                value={neighborhood}
+                onChange={(e) => setNeighborhood(e.target.value)}
+              >
+                <option value="">Seleccioná tu barrio...</option>
+                {availableNeighborhoods.map((n) => (
+                  <option key={n} value={n}>{n}</option>
+                ))}
+                <option value="Otro">Otro (crear nuevo)</option>
+              </select>
             </div>
+
+            {neighborhood === 'Otro' && (
+              <div>
+                <label htmlFor="customNeighborhood" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Ingresá el nombre de tu barrio
+                </label>
+                <input
+                  id="customNeighborhood"
+                  name="customNeighborhood"
+                  type="text"
+                  required
+                  placeholder="Nombre del barrio"
+                  className="w-full px-3 py-2.5 border border-gray-200 placeholder-gray-400 text-gray-900 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-colors"
+                  value={customNeighborhood}
+                  onChange={(e) => setCustomNeighborhood(e.target.value)}
+                />
+              </div>
+            )}
 
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+              className="w-full py-3 px-4 bg-blue-900 text-white text-sm font-bold rounded-xl hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 transition-colors shadow-sm"
             >
               Completar registro
             </button>
@@ -168,29 +161,27 @@ export default function Auth() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-        <div className="text-center">
-          <Package className="mx-auto h-12 w-12 text-green-600" />
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Inicia sesión
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Para comprar junto a tu barrio
-          </p>
+    <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] py-12 px-4 bg-gradient-to-b from-blue-50 to-white">
+      <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-sm border border-blue-100">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-900 text-white rounded-2xl mb-4 shadow-sm">
+            <Package className="h-7 w-7" />
+          </div>
+          <h2 className="text-2xl font-extrabold text-gray-900">Inicia sesión</h2>
+          <p className="mt-2 text-sm text-gray-500">Para comprar junto a tu barrio</p>
         </div>
 
-        <div className="mt-8 space-y-6">
+        <div className="space-y-4">
           {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm flex items-center">
-              <AlertCircle className="h-4 w-4 mr-2" />
+            <div className="bg-red-50 text-red-600 p-3 rounded-xl text-sm flex items-center gap-2 border border-red-100">
+              <AlertCircle className="h-4 w-4 flex-shrink-0" />
               {error}
             </div>
           )}
           <button
             type="button"
             onClick={handleGoogleSignIn}
-            className="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+            className="w-full flex items-center justify-center py-3 px-4 border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 transition-colors shadow-sm"
           >
             <img className="h-5 w-5 mr-3" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" />
             Continuar con Google

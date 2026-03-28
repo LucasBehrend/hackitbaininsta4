@@ -42,46 +42,34 @@ export default function Products() {
   useEffect(() => {
     const fetchDemandAndLoadProducts = async () => {
       if (!user || !user.neighborhood) {
-        // If not logged in or no neighborhood, just show products with 0 demand
         setProducts(baseProducts);
         setLoading(false);
         return;
       }
 
       try {
-        // Fetch all orders for the user's specific neighborhood
         const q = query(
           collection(db, 'orders'),
           where('neighborhood', '==', user.neighborhood)
         );
 
         const querySnapshot = await getDocs(q);
-
-        // Calculate total demand per product ID
         const demandMap: Record<string, number> = {};
 
         querySnapshot.forEach((doc) => {
           const orderData = doc.data();
           if (orderData.items && Array.isArray(orderData.items)) {
             orderData.items.forEach((item: { id: string; quantity: number }) => {
-              if (!demandMap[item.id]) {
-                demandMap[item.id] = 0;
-              }
+              if (!demandMap[item.id]) demandMap[item.id] = 0;
               demandMap[item.id] += item.quantity;
             });
           }
         });
 
-        // Update products with real demand
-        const updatedProducts = baseProducts.map(p => ({
-          ...p,
-          demand: demandMap[p.id] || 0
-        }));
-
-        setProducts(updatedProducts);
+        setProducts(baseProducts.map(p => ({ ...p, demand: demandMap[p.id] || 0 })));
       } catch (error) {
         console.error('Error fetching neighborhood demand:', error);
-        setProducts(baseProducts); // Fallback
+        setProducts(baseProducts);
       } finally {
         setLoading(false);
       }
@@ -97,38 +85,38 @@ export default function Products() {
   });
 
   return (
-    <div className="space-y-6">
-      <header className="mb-8 text-center md:text-left">
-        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-2">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <header className="mb-8">
+        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-1">
           Productos Mayoristas
         </h1>
-        <p className="text-gray-500 max-w-2xl text-lg mb-6">
-          Compra en cantidad con tus vecinos y accede a precios de supermercado mayorista directamente en tu barrio.
+        <p className="text-gray-400 max-w-2xl text-base mb-6">
+          Comprá en cantidad con tus vecinos y accedé a precios de mayorista directamente en tu barrio.
         </p>
 
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-          <div className="relative w-full md:w-96">
+        <div className="flex flex-col md:flex-row gap-3 items-center bg-white p-4 rounded-2xl border border-blue-100 shadow-sm">
+          <div className="relative w-full md:w-80">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-gray-400" />
+              <Search className="h-4 w-4 text-gray-400" />
             </div>
             <input
               type="text"
               placeholder="Buscar productos..."
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm transition-colors"
+              className="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-colors"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 
-          <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
+          <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar w-full md:w-auto">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold transition-all ${
                   selectedCategory === cat
-                    ? 'bg-green-600 text-white shadow-sm'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-900 text-white shadow-sm'
+                    : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
                 }`}
               >
                 {cat}
@@ -139,16 +127,15 @@ export default function Products() {
       </header>
 
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {[...Array(8)].map((_, i) => (
-            <div key={i} className="animate-pulse bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden h-96">
-              <div className="h-48 bg-gray-200" />
-              <div className="p-4 space-y-4">
-                <div className="h-4 bg-gray-200 rounded w-1/4" />
-                <div className="h-6 bg-gray-200 rounded w-3/4" />
-                <div className="h-4 bg-gray-200 rounded w-full" />
-                <div className="h-8 bg-gray-200 rounded w-1/2" />
-                <div className="h-10 bg-gray-200 rounded w-full" />
+            <div key={i} className="animate-pulse bg-white rounded-2xl border border-gray-100 overflow-hidden h-96">
+              <div className="h-48 bg-blue-50" />
+              <div className="p-5 space-y-3">
+                <div className="h-4 bg-gray-100 rounded w-3/4" />
+                <div className="h-4 bg-gray-100 rounded w-1/2" />
+                <div className="h-8 bg-gray-100 rounded w-1/3" />
+                <div className="h-10 bg-gray-100 rounded w-full" />
               </div>
             </div>
           ))}
@@ -156,18 +143,18 @@ export default function Products() {
       ) : (
         <>
           {filteredProducts.length === 0 ? (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-100 shadow-sm">
-              <h3 className="text-lg font-medium text-gray-900">No se encontraron productos</h3>
-              <p className="mt-1 text-gray-500">Prueba ajustando tu búsqueda o filtros.</p>
+            <div className="text-center py-16 bg-white rounded-2xl border border-blue-100">
+              <p className="text-lg font-semibold text-gray-700 mb-1">No se encontraron productos</p>
+              <p className="text-gray-400 text-sm mb-4">Probá ajustando tu búsqueda o filtros.</p>
               <button
                 onClick={() => { setSearchTerm(''); setSelectedCategory('Todos'); }}
-                className="mt-4 text-green-600 hover:text-green-700 font-medium"
+                className="text-blue-800 hover:text-blue-900 font-semibold text-sm"
               >
                 Limpiar filtros
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

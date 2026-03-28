@@ -55,9 +55,11 @@ export default function Cart() {
   if (orderSuccess) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-        <CheckCircle className="h-20 w-20 text-green-500 mb-6 animate-bounce" />
+        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+          <CheckCircle className="h-10 w-10 text-blue-800" />
+        </div>
         <h1 className="text-3xl font-extrabold text-gray-900 mb-3">¡Pedido registrado!</h1>
-        <p className="text-lg text-gray-600 mb-2">Tu pedido fue sumado a la demanda de tu barrio.</p>
+        <p className="text-gray-500 mb-2">Tu pedido fue sumado a la demanda de tu barrio.</p>
         <p className="text-sm text-gray-400 animate-pulse">Redirigiendo al inicio...</p>
       </div>
     );
@@ -65,13 +67,15 @@ export default function Cart() {
 
   if (items.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] text-gray-500">
-        <ShoppingBag className="h-24 w-24 mb-6 text-gray-300" />
-        <h2 className="text-2xl font-semibold mb-2 text-gray-700">Tu carrito está vacío</h2>
-        <p className="mb-6">¡Descubrí los productos con demanda comunal en tu barrio!</p>
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
+        <div className="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-6">
+          <ShoppingBag className="h-12 w-12 text-blue-200" />
+        </div>
+        <h2 className="text-2xl font-bold mb-2 text-gray-800">Tu carrito está vacío</h2>
+        <p className="mb-6 text-gray-400 text-sm">¡Descubrí los productos con demanda comunal en tu barrio!</p>
         <Link
           to="/productos"
-          className="bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors"
+          className="bg-blue-900 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-800 transition-colors shadow-sm"
         >
           Ver productos
         </Link>
@@ -83,17 +87,17 @@ export default function Cart() {
     <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Tu Carrito</h1>
-        <Link to="/productos" className="text-green-600 hover:text-green-700 font-medium flex items-center group">
-          <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+        <Link to="/productos" className="text-blue-800 hover:text-blue-900 font-semibold text-sm flex items-center group">
+          <ArrowLeft className="h-4 w-4 mr-1.5 group-hover:-translate-x-1 transition-transform" />
           Seguir comprando
         </Link>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="flex-grow space-y-4">
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="flex-grow space-y-3">
           {items.map((item) => (
-            <div key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="h-24 w-24 bg-gray-50 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden border border-gray-100">
+            <div key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-gray-100 hover:border-blue-100 hover:shadow-sm transition-all">
+              <div className="h-20 w-20 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden border border-blue-50">
                 {item.image ? (
                   <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
                 ) : (
@@ -102,66 +106,65 @@ export default function Cart() {
               </div>
 
               <div className="flex-grow w-full sm:w-auto">
-                <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-2">{item.name}</h3>
-                <div className="text-2xl font-black text-gray-900">${item.price.toFixed(2)}</div>
+                <h3 className="text-base font-bold text-gray-900 mb-0.5 line-clamp-2">{item.name}</h3>
+                <div className="text-xl font-black text-blue-900">${item.price.toFixed(2)}</div>
               </div>
 
-              <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4 mt-4 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-0 border-gray-100">
-                <div className="flex items-center bg-gray-50 rounded-lg p-1 border border-gray-200">
+              <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4 mt-3 sm:mt-0 pt-3 sm:pt-0 border-t sm:border-0 border-gray-100">
+                <div className="flex items-center bg-blue-50 rounded-xl p-1 border border-blue-100">
                   <button
                     onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                    className="p-2 rounded-md text-gray-600 hover:bg-white hover:shadow-sm hover:text-gray-900 transition-all focus:outline-none"
+                    className="p-2 rounded-lg text-blue-700 hover:bg-white hover:shadow-sm transition-all"
                     aria-label="Decrease quantity"
                   >
-                    <Minus className="h-4 w-4" />
+                    <Minus className="h-3.5 w-3.5" />
                   </button>
-                  <span className="w-10 text-center font-bold text-gray-900">{item.quantity}</span>
+                  <span className="w-9 text-center font-bold text-blue-900 text-sm">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="p-2 rounded-md text-gray-600 hover:bg-white hover:shadow-sm hover:text-gray-900 transition-all focus:outline-none"
+                    className="p-2 rounded-lg text-blue-700 hover:bg-white hover:shadow-sm transition-all"
                     aria-label="Increase quantity"
                   >
-                    <Plus className="h-4 w-4" />
+                    <Plus className="h-3.5 w-3.5" />
                   </button>
                 </div>
 
                 <button
                   onClick={() => removeItem(item.id)}
-                  className="p-2.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors focus:outline-none"
+                  className="p-2.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors"
                   aria-label="Remove item"
                   title="Eliminar producto"
                 >
-                  <Trash2 className="h-5 w-5" />
+                  <Trash2 className="h-4 w-4" />
                 </button>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="w-full lg:w-[340px] flex-shrink-0">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 sticky top-24">
-            <h3 className="text-xl font-bold text-gray-900 mb-6">Resumen del pedido</h3>
+        <div className="w-full lg:w-[320px] flex-shrink-0">
+          <div className="bg-white p-6 rounded-2xl border border-blue-100 sticky top-24">
+            <h3 className="text-lg font-bold text-gray-900 mb-5">Resumen del pedido</h3>
 
-            <div className="space-y-4 mb-6">
-              <div className="flex justify-between text-gray-600">
+            <div className="space-y-3 mb-5">
+              <div className="flex justify-between text-sm text-gray-500">
                 <span>Productos ({items.length})</span>
-                <span>${total.toFixed(2)}</span>
+                <span className="font-medium text-gray-700">${total.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-gray-600">
+              <div className="flex justify-between text-sm text-gray-500">
                 <span>Envío al barrio</span>
-                <span className="text-green-600 font-medium">Gratis</span>
+                <span className="text-blue-700 font-semibold">Gratis</span>
               </div>
-
-              <div className="border-t border-gray-200 pt-4 flex justify-between font-bold text-lg text-gray-900">
+              <div className="border-t border-gray-100 pt-3 flex justify-between font-bold text-gray-900">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span className="text-blue-900 text-lg">${total.toFixed(2)}</span>
               </div>
             </div>
 
             <button
               onClick={handleCheckout}
               disabled={isSubmitting}
-              className="w-full bg-green-600 text-white py-3.5 px-4 rounded-xl font-bold text-lg hover:bg-green-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:hover:-translate-y-0 disabled:hover:shadow-none"
+              className="w-full bg-blue-900 text-white py-3.5 px-4 rounded-xl font-bold text-base hover:bg-blue-800 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:hover:-translate-y-0 disabled:hover:shadow-none"
             >
               {isSubmitting ? (
                 <>
@@ -173,7 +176,7 @@ export default function Cart() {
               )}
             </button>
             {!user && (
-              <p className="text-sm text-center text-gray-500 mt-4">
+              <p className="text-xs text-center text-gray-400 mt-3">
                 Tendrás que iniciar sesión en el siguiente paso.
               </p>
             )}
