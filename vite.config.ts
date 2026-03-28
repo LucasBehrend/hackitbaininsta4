@@ -10,7 +10,5 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
-  preview: {
-    historyApiFallback: true,
-  },
+
 })
