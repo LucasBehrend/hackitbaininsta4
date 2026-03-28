@@ -61,7 +61,11 @@ export default function Auth() {
     const userDocRef = doc(db, 'users', user.uid);
     const userDoc = await getDoc(userDocRef);
     if (userDoc.exists() && userDoc.data().neighborhood) {
-      navigate('/productos');
+      if (userDoc.data().admin === 1) {
+        navigate('/admin');
+      } else {
+        navigate('/productos');
+      }
     } else {
       setPendingUser(user);
       setNeedsNeighborhood(true);
@@ -154,9 +158,9 @@ export default function Auth() {
       await setDoc(doc(db, 'users', pendingUser.uid), {
         name: pendingUser.displayName,
         email: pendingUser.email,
-        photoURL: pendingUser.photoURL ?? null,
         neighborhood: finalNeighborhood,
         lote: lote.trim(),
+        admin: 0,
         createdAt: new Date(),
       });
       if (neighborhood === 'Otro') {

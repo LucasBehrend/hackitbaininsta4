@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from './lib/firebase';
 import useAuthStore, { type UserProfile } from './store/useAuthStore';
 import Navbar from './components/Navbar';
@@ -11,6 +11,7 @@ import Auth from './pages/Auth';
 import Cart from './pages/Cart';
 import CheckoutResult from './pages/CheckoutResult';
 import Orders from './pages/Orders';
+import AdminOrders from './pages/AdminOrders';
 import { Loader2 } from 'lucide-react';
 
 function App() {
@@ -25,9 +26,14 @@ function App() {
 
         let neighborhood = '';
         let lote = '';
+        let admin = 0;
         if (userDoc.exists()) {
           neighborhood = userDoc.data().neighborhood || '';
           lote = userDoc.data().lote || '';
+          if (userDoc.data().admin === undefined) {
+            await updateDoc(userDocRef, { admin: 0 });
+          }
+          admin = userDoc.data().admin ?? 0;
         }
 
         const userProfile: UserProfile = {
@@ -37,6 +43,7 @@ function App() {
           photoURL: firebaseUser.photoURL || undefined,
           neighborhood,
           lote,
+          admin,
         };
         setUser(userProfile);
 
@@ -72,6 +79,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout/result" element={<CheckoutResult />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/admin" element={<AdminOrders />} />
         </Routes>
       </main>
     </div>

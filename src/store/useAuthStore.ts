@@ -9,6 +9,7 @@ export interface UserProfile {
   neighborhood?: string;
   lote?: string;
   photoURL?: string;
+  admin?: number;
 }
 
 interface AuthState {
