@@ -11,7 +11,7 @@ import Auth from './pages/Auth';
 import Cart from './pages/Cart';
 import CheckoutResult from './pages/CheckoutResult';
 import Orders from './pages/Orders';
-
+//
 function App() {
   const { setUser, setLoading } = useAuthStore();
 
