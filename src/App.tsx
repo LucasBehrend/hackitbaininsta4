@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Package } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from './lib/firebase';
@@ -88,9 +87,7 @@ function App() {
       <footer className="bg-gray-950 text-gray-400 py-8 px-4">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <div className="flex items-center gap-2 font-bold text-white">
-            <div className="bg-blue-900 p-1.5 rounded-lg">
-              <Package className="h-4 w-4 text-white" />
-            </div>
+            <img src="/1000263316.png" alt="CoMarket" className="h-7 w-7 rounded-lg object-cover" />
             CoMarket
           </div>
           <div className="text-center text-xs text-gray-500">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, LogOut, Package, ClipboardList, X } from 'lucide-react';
+import { ShoppingCart, LogOut, ClipboardList, X } from 'lucide-react';
 import useCartStore from '../store/useCartStore';
 import useAuthStore from '../store/useAuthStore';
 
@@ -49,9 +49,7 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2.5 text-xl font-bold text-blue-900">
-              <div className="bg-blue-900 text-white p-1.5 rounded-lg">
-                <Package className="h-5 w-5" />
-              </div>
+              <img src="/1000263316.png" alt="CoMarket" className="h-8 w-8 rounded-lg object-cover" />
               <span>CoMarket</span>
             </Link>
           </div>
