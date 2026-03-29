@@ -35,9 +35,7 @@ export default function Auth() {
   const [lote, setLote] = useState('');
   const [needsNeighborhood, setNeedsNeighborhood] = useState(false);
   const [pendingUser, setPendingUser] = useState<FirebaseUser | null>(null);
-  const [availableNeighborhoods, setAvailableNeighborhoods] = useState<string[]>([
-    'Los Sauces', 'El Cantón', 'Nordelta', 'San Sebastián', 'Pilar del Este',
-  ]);
+  const [availableNeighborhoods, setAvailableNeighborhoods] = useState<string[]>([]);
 
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -48,10 +46,8 @@ export default function Auth() {
     const fetchNeighborhoods = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, 'neighborhoods'));
-        const fetched = querySnapshot.docs.map(d => d.data().name as string);
-        setAvailableNeighborhoods(prev =>
-          Array.from(new Set([...prev, ...fetched])).sort()
-        );
+        const fetched = querySnapshot.docs.map(d => d.data().name as string).sort();
+        setAvailableNeighborhoods(fetched);
       } catch (err) {
         console.error('Error fetching neighborhoods:', err);
       }
