@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft, Loader2, CheckCircle, AlertTriangle, X } from 'lucide-react';
-import { collection, addDoc, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, query, where, getDocs, writeBatch, doc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import useCartStore from '../store/useCartStore';
 import useAuthStore from '../store/useAuthStore';
@@ -126,6 +126,24 @@ export default function Cart() {
         status: 'Pendiente',
         createdAt: serverTimestamp(),
       });
+
+      // Check if all users in the neighborhood have placed an order → auto-confirm
+      if (user.neighborhood) {
+        const [usersSnap, pendingSnap] = await Promise.all([
+          getDocs(query(collection(db, 'users'), where('neighborhood', '==', user.neighborhood))),
+          getDocs(query(collection(db, 'orders'), where('neighborhood', '==', user.neighborhood), where('status', '==', 'Pendiente'))),
+        ]);
+
+        const totalResidents = usersSnap.size;
+        const residentsWithOrder = new Set(pendingSnap.docs.map(d => d.data().userId));
+
+        if (totalResidents > 0 && residentsWithOrder.size >= totalResidents) {
+          const batch = writeBatch(db);
+          pendingSnap.docs.forEach(d => batch.update(doc(db, 'orders', d.id), { status: 'Confirmado' }));
+          await batch.commit();
+        }
+      }
+
       clearCart();
       setOrderSuccess(true);
       setTimeout(() => navigate('/orders'), 2500);

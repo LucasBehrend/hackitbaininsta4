@@ -14,6 +14,7 @@ interface OrderItem {
 
 interface Order {
   id: string;
+  userId: string;
   date: string;
   status: 'Pendiente' | 'Confirmado' | 'Entregado' | 'Cancelado';
   total: number;
@@ -21,10 +22,10 @@ interface Order {
 }
 
 const STATUS_CONFIG = {
-  Entregado: { icon: CheckCircle2, color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
+  Entregado: { icon: CheckCircle2, color: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200' },
   Pendiente: { icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200' },
   Cancelado: { icon: XCircle, color: 'text-red-500', bg: 'bg-red-50', border: 'border-red-200' },
-  Confirmado: { icon: Package, color: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200' },
+  Confirmado: { icon: Package, color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
 };
 
 export default function Orders() {

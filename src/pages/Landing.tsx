@@ -75,7 +75,7 @@ export default function Landing() {
               <div className="h-14 w-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mb-5">
                 <Users className="h-7 w-7" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Compra Individual, Pedido Grupal</h3>
+              <h3 className="text-lg font-bold text-white mb-2">Pedí en comunidad</h3>
               <p className="text-blue-200 text-sm leading-relaxed">
                 Cada vecino elige lo que necesita y paga su parte. Nosotros nos encargamos de unificar todo el pedido del barrio.
               </p>
@@ -87,7 +87,7 @@ export default function Landing() {
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Envío Simplificado</h3>
               <p className="text-gray-500 text-sm leading-relaxed">
-                Coordinamos una única entrega al barrio, reduciendo costos de logística y el tránsito en el acceso de tu loteo.
+                Armás tu lista de compras, pedís, pagás y recibís el pedido en la puerta de tu casa al mejor precio. 
               </p>
             </div>
           </div>

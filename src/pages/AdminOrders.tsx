@@ -184,7 +184,7 @@ export default function AdminOrders() {
               <div
                 key={group.neighborhood}
                 className={`bg-white rounded-2xl border overflow-hidden transition-colors ${
-                  group.allDelivered ? 'border-emerald-100' : 'border-gray-100 hover:border-blue-100'
+                  group.allDelivered ? 'border-blue-100' : 'border-gray-100 hover:border-blue-100'
                 }`}
               >
                 {/* Header */}
@@ -206,7 +206,7 @@ export default function AdminOrders() {
 
                     <div className="flex items-center gap-3 w-full sm:w-auto">
                       {group.allDelivered ? (
-                        <div className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border text-emerald-600 bg-emerald-50 border-emerald-200">
+                        <div className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border text-blue-700 bg-blue-50 border-blue-200">
                           <CheckCircle2 className="h-3 w-3" />
                           Entregado
                         </div>
@@ -264,7 +264,7 @@ export default function AdminOrders() {
                             <div className="flex items-center gap-2">
                               <span className="font-semibold text-gray-800">${order.total.toFixed(2)}</span>
                               {order.status === 'Entregado' ? (
-                                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                                <CheckCircle2 className="h-3.5 w-3.5 text-blue-500" />
                               ) : (
                                 <Clock className="h-3.5 w-3.5 text-amber-400" />
                               )}
