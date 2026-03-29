@@ -10,6 +10,7 @@ import {
 import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore';
 import { auth, db, googleProvider } from '../lib/firebase';
 import { Package, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import useAuthStore, { type UserProfile } from '../store/useAuthStore';
 
 type AuthTab = 'login' | 'register';
 
@@ -41,6 +42,7 @@ export default function Auth() {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     const fetchNeighborhoods = async () => {
@@ -61,7 +63,18 @@ export default function Auth() {
     const userDocRef = doc(db, 'users', user.uid);
     const userDoc = await getDoc(userDocRef);
     if (userDoc.exists() && userDoc.data().neighborhood) {
-      if (userDoc.data().admin === 1) {
+      const data = userDoc.data();
+      const profile: UserProfile = {
+        uid: user.uid,
+        name: user.displayName || 'Usuario',
+        email: user.email || '',
+        photoURL: user.photoURL || undefined,
+        neighborhood: data.neighborhood || '',
+        lote: data.lote || '',
+        admin: data.admin ?? 0,
+      };
+      setUser(profile);
+      if (data.admin === 1) {
         navigate('/admin');
       } else {
         navigate('/productos');
@@ -169,6 +182,16 @@ export default function Auth() {
           address: neighborhoodAddress.trim(),
         });
       }
+      const updatedProfile: UserProfile = {
+        uid: pendingUser.uid,
+        name: pendingUser.displayName || 'Usuario',
+        email: pendingUser.email || '',
+        photoURL: pendingUser.photoURL || undefined,
+        neighborhood: finalNeighborhood,
+        lote: lote.trim(),
+        admin: 0,
+      };
+      setUser(updatedProfile);
       navigate('/productos');
     } catch (err) {
       console.error(err);
