@@ -10,6 +10,7 @@ interface OrderItem {
   name: string;
   quantity: number;
   price: number;
+  preferenciaDemandaBaja?: 'minorista' | 'noIncluir' | null;
 }
 
 interface Order {
@@ -156,12 +157,24 @@ export default function Orders() {
                     <h4 className="font-semibold text-gray-700 text-sm mt-4 mb-3">Detalle del pedido</h4>
                     <ul className="space-y-2">
                       {order.items.map((item) => (
-                        <li key={item.id} className="flex justify-between items-center text-sm">
-                          <div className="flex items-center gap-2">
-                            <span className="w-7 text-center bg-blue-100 text-blue-800 rounded-lg py-0.5 text-xs font-bold">{item.quantity}x</span>
-                            <span className="text-gray-600">{item.name}</span>
+                        <li key={item.id} className="flex justify-between items-start text-sm gap-3">
+                          <div className="flex items-start gap-2 min-w-0">
+                            <span className="w-7 text-center bg-blue-100 text-blue-800 rounded-lg py-0.5 text-xs font-bold flex-shrink-0">{item.quantity}x</span>
+                            <div className="min-w-0">
+                              <span className="text-gray-600">{item.name}</span>
+                              {item.preferenciaDemandaBaja === 'minorista' && (
+                                <span className="ml-2 inline-block text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                                  Si no se llega: precio minorista
+                                </span>
+                              )}
+                              {item.preferenciaDemandaBaja === 'noIncluir' && (
+                                <span className="ml-2 inline-block text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                                  Si no se llega: no se compra
+                                </span>
+                              )}
+                            </div>
                           </div>
-                          <span className="text-gray-800 font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="text-gray-800 font-semibold flex-shrink-0">${(item.price * item.quantity).toFixed(2)}</span>
                         </li>
                       ))}
                     </ul>

@@ -48,13 +48,13 @@ export default function Navbar() {
                   </>
                 )}
                 <div className="flex items-center space-x-2 border-l border-blue-100 pl-4 ml-1">
-                  <span className="text-sm text-gray-600 hidden sm:block font-medium">
+                  <Link to="/perfil" className="text-sm text-gray-600 hidden sm:block font-medium hover:text-blue-900 transition-colors">
                     {user.name}
                     {user.admin === 1
                       ? <span className="ml-1 text-xs bg-blue-900 text-white px-1.5 py-0.5 rounded font-semibold">Admin</span>
                       : <span className="text-gray-400 font-normal"> · {user.neighborhood}</span>
                     }
-                  </span>
+                  </Link>
                   <button
                     onClick={logout}
                     className="p-2 text-gray-400 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50"

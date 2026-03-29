@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 import CheckoutResult from './pages/CheckoutResult';
 import Orders from './pages/Orders';
 import AdminOrders from './pages/AdminOrders';
+import Profile from './pages/Profile';
 import { Loader2 } from 'lucide-react';
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
           <Route path="/checkout/result" element={<CheckoutResult />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/admin" element={<AdminOrders />} />
+          <Route path="/perfil" element={<Profile />} />
         </Routes>
       </main>
     </div>
