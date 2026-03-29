@@ -75,7 +75,7 @@ export default function Cart() {
   // Items that require a user decision (non-essential + low demand)
   const itemsNeedingDecision = useMemo(
     () => items.filter(item => {
-      const esencial = esencialMap[item.id] ?? true;
+      const esencial = esencialMap[item.id] ?? false;
       if (esencial) return false;
       return (demandMap[item.id] || 0) < MIN_DEMAND;
     }),
@@ -307,7 +307,7 @@ export default function Cart() {
                           }
                         </div>
                         <button
-                          onClick={() => setDecisions(prev => { const n = { ...prev }; delete n[item.id]; return n; })}
+                          onClick={() => setDecisions(prev => { const { [item.id]: _, ...rest } = prev; return rest; })}
                           className="text-xs text-blue-700 hover:text-blue-900 font-semibold ml-3"
                         >
                           Cambiar

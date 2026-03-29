@@ -52,7 +52,7 @@ export default function Orders() {
           return {
             id: doc.id,
 
-            userId: data.userId || user.uid, // <-- Agregá esta línea
+            userId: data.userId || user.uid,
 
             date: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString(),
             status: data.status || 'Pendiente',
