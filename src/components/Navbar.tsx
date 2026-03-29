@@ -52,7 +52,7 @@ export default function Navbar() {
               <div className="bg-blue-900 text-white p-1.5 rounded-lg">
                 <Package className="h-5 w-5" />
               </div>
-              <span>ComprasComunales</span>
+              <span>CoMarket</span>
             </Link>
           </div>
 

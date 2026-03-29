@@ -1,5 +1,5 @@
 [
-    {
+  {
     "nombre": "ACEITE MAROLIO MEZCLA 900 CC",
     "precio": "$ 2.099,89",
     "precioMino": "$ 2.393,88",
@@ -7,20 +7,19 @@
     "link": "https://maxiconsumo.com/sucursal_moreno/almacen/aceite-marolio-mezcla-900-cc-304.html",
     "Categoria": "Alimentos",
     "Esencial": 1
-    },
-     {
+  },
+  {
     "nombre": "YERBA AMANDA 1 KG",
-    "precio": "$ 3.149,90",
+    "precio": "$ 3.149,90",
     "precioMino": "$ 3.590,88",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/2/0/20772_1.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/almacen/yerba-amanda-1-kg-20772.html",
     "Categoria": "Bebidas",
     "Esencial": 1
   },
-  
   {
     "nombre": "GALLETITAS RIERA CRACKERS DE ARROZ 100 GR",
-    "precio": "$ 1.549,89",
+    "precio": "$ 1.549,89",
     "precioMino": "$ 1.766,87",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/2/1/21495_176170893069018b820def21.62551432.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/almacen/galletitas-riera-crackers-de-arroz-100-gr-21495.html",
@@ -29,7 +28,7 @@
   },
   {
     "nombre": "ARROZ LUCCHETTI LARGO FINO 500 GR",
-    "precio": "$ 749,90",
+    "precio": "$ 749,90",
     "precioMino": "$ 854,88",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/2/1/21118.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/almacen/arroz-lucchetti-largo-fino-500-gr-21118.html",
@@ -38,7 +37,7 @@
   },
   {
     "nombre": "ARROZ MARIA LARGO FINO 500 GR",
-    "precio": "$ 569,90",
+    "precio": "$ 569,90",
     "precioMino": "$ 649,68",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/2/8/28426_17465040606819897c550085.37426972.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/almacen/arroz-maria-largo-fino-500-gr-28426.html",
@@ -47,7 +46,7 @@
   },
   {
     "nombre": "FIDEOS SANTA ISABEL CODITO 500 GR",
-    "precio": "$ 519,90",
+    "precio": "$ 519,90",
     "precioMino": "$ 592,69",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/2/2/22219_174244295167db91c76becd1.25081550.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/almacen/fideos-santa-isabel-codito-500-gr-22219.html",
@@ -55,17 +54,17 @@
     "Esencial": 1
   },
   {
-    "nombre": "PAPAS FRITAS MAROLIO CREMA Y CEBOLLA 130 gr",
-    "precio": "$ 2.699,90",
+    "nombre": "PAPAS FRITAS MAROLIO CREMA Y CEBOLLA 130 GR",
+    "precio": "$ 2.699,90",
     "precioMino": "$ 3.077,88",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/2/5/25578_174408365967f49acb35b800.71722831.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/almacen/papas-fritas-marolio-crema-y-cebolla-130-gr-25578.html",
     "Categoria": "Alimentos",
     "Esencial": 0
   },
-    {
-    "nombre": "TURRON BARILOCHE MANI C.FRUT 100 gr",
-    "precio": "$ 1.399,90",
+  {
+    "nombre": "TURRON BARILOCHE MANI C.FRUT 100 GR",
+    "precio": "$ 1.399,90",
     "precioMino": "$ 1.595,88",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/8/2/8219_176162375069003ec6dc9bb5.83652765.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/catalog/product/view/id/68802/s/turron-bariloche-mani-c-frut-100-gr-8219/category/4/",
@@ -74,7 +73,7 @@
   },
   {
     "nombre": "MATE COCIDO UNION 50 UN",
-    "precio": "$ 2.299,90",
+    "precio": "$ 2.299,90",
     "precioMino": "$ 2.621,88",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/1/2/12630.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/almacen/mate-cocido-union-50-un-12630.html",
@@ -91,18 +90,18 @@
     "Esencial": 1
   },
   {
-    "nombre": " PAPEL HIGIENICO ELITE DOBLE HOJA ULTRA 4X30 MT ",
+    "nombre": "PAPEL HIGIENICO ELITE DOBLE HOJA ULTRA 4X30 MT",
     "precio": "$ 2.999,90",
-    "precioMino": "$ $ 3.419,89",
+    "precioMino": "$ 3.419,89",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/9/1/9177_16982913546539de9a58d289.35518904.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/papel-higienico-elite-doble-hoja-ultra-4x30-mt-9177.html",
     "Categoria": "Higiene",
     "Esencial": 1
   },
   {
-    "nombre": " JABON DE TOCADOR LUX LIRIO AZUL 3X120 GR ",
+    "nombre": "JABON DE TOCADOR LUX LIRIO AZUL 3X120 GR",
     "precio": "$ 2.899,90",
-    "precioMino": " $ 3.305,88 ",
+    "precioMino": "$ 3.305,88",
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/2/1/21433_17465040686819898434fc31.69542177.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/jabon-de-tocador-lux-lirio-azul-3x120-gr-21433.html",
     "Categoria": "Higiene",
@@ -124,6 +123,51 @@
     "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/1/6/16114_1748318471683539077dc7a1.14546046.jpg",
     "link": "https://maxiconsumo.com/sucursal_moreno/limpiavidrio-cif-vidrio-doypack-900-ml-16114.html",
     "Categoria": "Limpieza",
+    "Esencial": 0
+  },
+  {
+    "nombre": "DETERGENTE MAGISTRAL LIMON 300 ML",
+    "precio": "$ 1.699,90",
+    "precioMino": "$ 1.937,89",
+    "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/5/7/577_1745380531680864b337a020.97298136.jpg",
+    "link": "https://maxiconsumo.com/sucursal_moreno/detergente-magistral-limon-300-ml-577.html",
+    "Categoria": "Limpieza",
+    "Esencial": 0
+  },
+  {
+    "nombre": "LAVANDINA AYUDIN EN GEL ORIGINAL 700 ML",
+    "precio": "$ 2.899,90",
+    "precioMino": "$ 3.305,88",
+    "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/2/0/20505_175626571968ae7cf7a53340.41683364.jpg",
+    "link": "https://maxiconsumo.com/sucursal_moreno/lavandina-ayudin-en-gel-original-700-ml-20505.html",
+    "Categoria": "Limpieza",
+    "Esencial": 0
+  },
+  {
+    "nombre": "DESINFECTANTE LYSOFORM BONUS 420 CC",
+    "precio": "$ 2.999,89",
+    "precioMino": "$ 3.419,88",
+    "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/2/6/26806.jpg",
+    "link": "https://maxiconsumo.com/sucursal_moreno/desinfectante-lysoform-bonus-420-cc-26806.html",
+    "Categoria": "Limpieza",
+    "Esencial": 0
+  },
+  {
+    "nombre": "SHAMPOO PANTENE MAX BRILLO EXTREMO 200 CC",
+    "precio": "$ 4.099,90",
+    "precioMino": "$ 4.673,89",
+    "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/1/5/15332_174356523067ecb1ae5abea9.45722167.jpg",
+    "link": "https://maxiconsumo.com/sucursal_moreno/shampoo-pantene-max-brillo-extremo-200-cc-15332.html",
+    "Categoria": "Higiene",
+    "Esencial": 0
+  },
+  {
+    "nombre": "CREMA DENTAL COLGATE SENSITIVE BLANQUEADORA 100 GR",
+    "precio": "$ 2.799,90",
+    "precioMino": "$ 3.191,89",
+    "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/1/7/17177.jpg",
+    "link": "https://maxiconsumo.com/sucursal_moreno/crema-dental-colgate-sensitive-blanqueadora-100-gr-17177.html",
+    "Categoria": "Higiene",
     "Esencial": 0
   }
 ]

@@ -103,7 +103,7 @@ export default function Landing() {
       <section className="py-24 bg-blue-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-3">¿Por qué Compras Comunales?</h2>
+            <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-3">¿Por qué CoMarket?</h2>
             <p className="text-gray-400 max-w-md mx-auto text-sm">La forma más inteligente de abastecer tu casa.</p>
           </div>
 
@@ -150,22 +150,6 @@ export default function Landing() {
           </div>
         </div>
       </section>
-
-      {/* ── Footer ──────────────────────────────────────────────── */}
-      <footer className="bg-gray-950 text-gray-400 py-8 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-          <div className="flex items-center gap-2 font-bold text-white">
-            <div className="bg-blue-900 p-1.5 rounded-lg">
-              <Package className="h-4 w-4 text-white" />
-            </div>
-            Compras Comunales
-          </div>
-          <div className="text-center text-xs text-gray-500">
-            © 2026 · Equipo ininsta · HackItBA 2026
-          </div>
-          <div className="text-xs text-gray-600">Todos los derechos reservados</div>
-        </div>
-      </footer>
 
     </div>
   );

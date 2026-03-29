@@ -1,0 +1,36 @@
+[
+  {
+    "id": "pack-despensa",
+    "nombre": "Pack Despensa Básica",
+    "descripcion": "Los esenciales del almacén para toda la semana.",
+    "imagen": "https://maxiconsumo.com/media/catalog/product/cache/f6b8d111adccee08c5421b7e0568bbfd/3/0/304_174244293867db91ba4f5e08.35908608.jpg",
+    "productos": [
+      "ACEITE MAROLIO MEZCLA 900 CC",
+      "ARROZ LUCCHETTI LARGO FINO 500 GR",
+      "FIDEOS SANTA ISABEL CODITO 500 GR",
+      "YERBA AMANDA 1 KG"
+    ]
+  },
+  {
+    "id": "pack-limpieza",
+    "nombre": "Pack Limpieza del Hogar",
+    "descripcion": "Todo para tener la casa impecable.",
+    "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/8/3/837_17503914406854da90390ee9.43809531.jpg",
+    "productos": [
+      "LIMPIADOR CIF CREMA BLANCO 750 GR",
+      "LIMPIAVIDRIO CIF VIDRIO DOYPACK 900 ML",
+      "DETERGENTE MAGISTRAL LIMON 300 ML"
+    ]
+  },
+  {
+    "id": "pack-higiene",
+    "nombre": "Pack Higiene Personal",
+    "descripcion": "Básicos de higiene para toda la familia.",
+    "imagen": "https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/9/1/9177_16982913546539de9a58d289.35518904.jpg",
+    "productos": [
+      "PAPEL HIGIENICO ELITE DOBLE HOJA ULTRA 4X30 MT",
+      "JABON DE TOCADOR LUX LIRIO AZUL 3X120 GR",
+      "AGUA VILLAVICENCIO 2 LT"
+    ]
+  }
+]
