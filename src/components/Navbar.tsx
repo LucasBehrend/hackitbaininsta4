@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, LogOut, Package, ClipboardList } from 'lucide-react';
+import { ShoppingCart, LogOut, Package, ClipboardList, X } from 'lucide-react';
 import useCartStore from '../store/useCartStore';
 import useAuthStore from '../store/useAuthStore';
 
@@ -7,8 +8,42 @@ export default function Navbar() {
   const cartItems = useCartStore((state) => state.items);
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const { user, logout } = useAuthStore();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (
+    <>
+    {showLogoutModal && (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowLogoutModal(false)} />
+        <div className="relative bg-white rounded-2xl shadow-xl border border-gray-100 p-6 w-full max-w-sm">
+          <button
+            onClick={() => setShowLogoutModal(false)}
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X className="h-4 w-4" />
+          </button>
+          <div className="flex items-center justify-center w-12 h-12 bg-red-50 rounded-2xl mb-4">
+            <LogOut className="h-5 w-5 text-red-500" />
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-1">Cerrar sesión</h3>
+          <p className="text-sm text-gray-500 mb-6">¿Estás seguro que querés cerrar sesión?</p>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setShowLogoutModal(false)}
+              className="flex-1 py-2.5 border border-gray-200 text-gray-700 text-sm font-semibold rounded-xl hover:bg-gray-50 transition-colors"
+            >
+              Cancelar
+            </button>
+            <button
+              onClick={() => { setShowLogoutModal(false); logout(); }}
+              className="flex-1 py-2.5 bg-red-500 text-white text-sm font-semibold rounded-xl hover:bg-red-600 transition-colors"
+            >
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
     <nav className="bg-white border-b border-blue-100 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
@@ -56,7 +91,7 @@ export default function Navbar() {
                     }
                   </Link>
                   <button
-                    onClick={logout}
+                    onClick={() => setShowLogoutModal(true)}
                     className="p-2 text-gray-400 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50"
                     title="Cerrar sesión"
                   >
@@ -81,5 +116,6 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+    </>
   );
 }

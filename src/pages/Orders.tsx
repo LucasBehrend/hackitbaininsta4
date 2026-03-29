@@ -51,6 +51,7 @@ export default function Orders() {
           const data = doc.data();
           return {
             id: doc.id,
+            userId: data.userId || '',
             date: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString(),
             status: data.status || 'Pendiente',
             total: data.total || 0,
