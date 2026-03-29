@@ -14,20 +14,14 @@ const parsePrice = (priceStr: string): number => {
 const CATEGORIES = ['Todos', 'Alimentos', 'Bebidas', 'Higiene', 'Limpieza'] as const;
 type Category = typeof CATEGORIES[number];
 
-const getCategory = (name: string): Category => {
-  const n = name.toLowerCase();
-  if (/agua|jugo|gaseosa|cerveza|vino|leche|yogur|bebida|sprite|coca|fanta|seven|monster|baggio|cepita|tang|levite|cunnington|villavicencio/.test(n)) return 'Bebidas';
-  if (/jabon personal|shampoo|acondicionador|desodorante|pasta dental|cepillo|afeitad|femenin|toalla|pañal|perfume|talco|crema facial|serum|tónico|micellar|limpieza facial/.test(n)) return 'Higiene';
-  if (/detergente|lavandina|limpiador|ajax|mr\.?\s*musculo|don benito|procenex|blem|cif|ayudin|ace|ala |ariel|skip|drive|downy|suavitel|pino/.test(n)) return 'Limpieza';
-  return 'Alimentos';
-};
-
 const baseProducts: Product[] = productosData.map((item, index) => ({
   id: `prod-${index}`,
   name: item.nombre,
   description: 'Producto de catálogo mayorista.',
-  category: getCategory(item.nombre),
+  category: (item.Categoria as Category) ?? 'Alimentos',
   price: parsePrice(item.precio),
+  precioMino: parsePrice(item.precioMino),
+  esencial: item.Esencial === 1,
   image: item.imagen,
   demand: 0,
 }));

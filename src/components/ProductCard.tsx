@@ -10,6 +10,8 @@ export interface Product {
   description: string;
   category: string;
   price: number;
+  precioMino?: number;
+  esencial?: boolean;
   image: string;
   demand?: number;
 }

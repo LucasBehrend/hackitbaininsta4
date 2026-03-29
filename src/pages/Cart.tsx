@@ -9,10 +9,18 @@ import productosData from '../data/productos1.json';
 
 const MIN_DEMAND = 6;
 
-// Lookup esencial by product id (prod-0, prod-1, ...)
+const parsePrice = (priceStr: string): number => {
+  const numericStr = priceStr.replace(/[^\d,]/g, '').replace(',', '.');
+  return parseFloat(numericStr);
+};
+
+// Lookup por product id (prod-0, prod-1, ...)
 const esencialMap: Record<string, boolean> = {};
+const precioMinoMap: Record<string, number> = {};
 productosData.forEach((item, index) => {
-  esencialMap[`prod-${index}`] = item.esencial ?? true;
+  const id = `prod-${index}`;
+  esencialMap[id] = item.Esencial === 1;
+  precioMinoMap[id] = parsePrice(item.precioMino);
 });
 
 // preferencias para el admin si no se llega al mínimo:
@@ -91,19 +99,29 @@ export default function Cart() {
 
     try {
       setIsSubmitting(true);
-      await addDoc(collection(db, 'orders'), {
-        userId: user.uid,
-        userName: user.name,
-        neighborhood: user.neighborhood || '',
-        items: items.map(item => ({
+
+      const orderItems = items.map(item => {
+        const decision = decisions[item.id] ?? null;
+        const base = {
           id: item.id,
           name: item.name,
           price: item.price,
           quantity: item.quantity,
           image: item.image,
-          // Preferencia del usuario si no se llega al mínimo mayorista
-          ...(decisions[item.id] && { preferenciaDemandaBaja: decisions[item.id] }),
-        })),
+          preferenciaDemandaBaja: decision,
+        };
+        if (decision === 'minorista') {
+          return { ...base, precioMino: precioMinoMap[item.id] ?? null };
+        }
+        return base;
+      });
+
+      await addDoc(collection(db, 'orders'), {
+        userId: user.uid,
+        userName: user.name,
+        neighborhood: user.neighborhood || '',
+        lote: user.lote || '',
+        items: orderItems,
         total,
         status: 'Pendiente',
         createdAt: serverTimestamp(),
@@ -250,7 +268,7 @@ export default function Cart() {
                             onClick={() => setDecision(item.id, 'minorista')}
                             className="flex-1 py-2 px-3 bg-white border border-amber-300 text-amber-800 text-sm font-semibold rounded-xl hover:bg-amber-50 transition-colors"
                           >
-                            Comprar igual a precio minorista
+                            Comprar a precio minorista (${precioMinoMap[item.id]?.toFixed(2) ?? '—'})
                           </button>
                           <button
                             onClick={() => setDecision(item.id, 'noIncluir')}
